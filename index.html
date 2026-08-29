@@ -31,16 +31,16 @@
 
   #captionArea{position:absolute;top:5%;left:50%;transform:translateX(-50%);width:88%;max-width:400px;display:flex;flex-direction:column;align-items:center;gap:16px;z-index:8;}
   #bubbleStack{position:relative;width:100%;min-height:150px;}
-  .bubble{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#000;border-top:2px solid #fff;border-bottom:2px solid #fff;padding:18px 10px;text-align:center;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .45s ease,transform .45s ease;}
+  .bubble{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:transparent;padding:18px 10px;text-align:center;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .6s ease,transform .6s cubic-bezier(.22,.61,.36,1);}
   .bubble.show{opacity:1;transform:translateY(0);}
   .bubble p{margin:0;font-family:'Quicksand',sans-serif;font-weight:700;font-size:1.134em;line-height:1.4;letter-spacing:.01em;color:#fff;}
   #bubble3{min-height:110px;}
 
-  .actionBtn{position:absolute;left:50%;top:calc(64% + 108px);z-index:9;background:transparent;border:2px solid var(--gold);color:var(--gold);font-family:'Quicksand',sans-serif;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.82em;padding:10px 26px;border-radius:999px;opacity:0;transform:translate(-50%,10px);pointer-events:none;transition:opacity .4s ease,transform .4s ease;}
+  .actionBtn{position:absolute;left:50%;top:calc(64% + 108px);z-index:9;background:transparent;border:2px solid var(--gold);color:var(--gold);font-family:'Quicksand',sans-serif;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.82em;padding:10px 26px;border-radius:999px;opacity:0;transform:translate(-50%,10px);pointer-events:none;transition:opacity .5s ease,transform .5s cubic-bezier(.22,.61,.36,1);}
   .actionBtn.show{opacity:1;transform:translate(-50%,0);pointer-events:auto;animation:glow 1.8s ease-in-out infinite;}
   @keyframes glow{0%,100%{box-shadow:0 0 0 rgba(217,183,118,0)}50%{box-shadow:0 0 14px rgba(217,183,118,.55)}}
 
-  #choiceBtns{position:absolute;left:50%;top:calc(64% + 108px);z-index:9;display:flex;gap:18px;opacity:0;transform:translate(-50%,10px);pointer-events:none;transition:opacity .4s ease,transform .4s ease;}
+  #choiceBtns{position:absolute;left:50%;top:calc(64% + 108px);z-index:9;display:flex;gap:18px;opacity:0;transform:translate(-50%,10px);pointer-events:none;transition:opacity .5s ease,transform .5s cubic-bezier(.22,.61,.36,1);}
   #choiceBtns.show{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
   .choiceBtn{background:transparent;border:2px solid var(--green);color:var(--green);font-family:'Quicksand',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.78em;padding:10px 19px;border-radius:999px;cursor:pointer;white-space:nowrap;animation:glowGreen 1.8s ease-in-out infinite;}
   #rejectBtn{border-color:#c98f9e;color:#c98f9e;animation:none;}
@@ -75,6 +75,38 @@
     .choiceBtn{font-size:.72em;padding:9px 13px;}
     #acceptedTitle{font-size:1.6em;top:8%;}
   }
+
+  @media (max-width: 420px) {
+    .bubble {
+      padding: 14px 16px;
+    }
+    .bubble p {
+      font-size: 1em;
+      line-height: 1.35;
+    }
+    #bubble3 {
+      min-height: 96px;
+    }
+    .actionBtn {
+      top: calc(64% + 96px);
+      padding: 9px 20px;
+      font-size: .76em;
+    }
+    #choiceBtns {
+      top: calc(64% + 96px);
+      gap: 10px;
+      width: 94%;
+      justify-content: center;
+    }
+    .choiceBtn {
+      font-size: .72em;
+      padding: 9px 14px;
+    }
+    #acceptedTitle {
+      width: 94%;
+      font-size: 1.5em;
+    }
+  }
 </style>
 </head>
 <body>
@@ -92,7 +124,7 @@
   <div id="captionArea">
     <div id="bubbleStack">
       <div class="bubble show" id="bubble1"><p>Salve...</p></div>
-      <div class="bubble" id="bubble2"><p>Spera di poterla portare fuori a cena e, magari, ricevere il suo numero.</p></div>
+      <div class="bubble" id="bubble2"><p>Vorrebbe invitarti ad uscire per conoscerti meglio e, magari, ricevere il tuo numero.</p></div>
       <div class="bubble" id="bubble3"><p>Il quale sarebbe molto apprezzato.</p></div>
     </div>
   </div>
@@ -138,7 +170,7 @@ window.addEventListener('load',()=>{showCat(catSerious);bubble1.classList.add('s
 continueBtn.addEventListener('click',e=>{e.stopPropagation();
   if(step===1){
     step=2;hideActions();hideAllBubbles();
-    setTimeout(()=>{bubble1.querySelector('p').textContent='Se legge questo messaggio è perché il mio cliente pensa che lei sia molto carina e...';bubble1.classList.add('show');continueBtn.classList.add('show');},350);
+    setTimeout(()=>{bubble1.querySelector('p').textContent='Se legge questo messaggio è perché il mio cliente pensa che sei molto carina e...';bubble1.classList.add('show');continueBtn.classList.add('show');},350);
   } else if(step===2){
     step=3;hideActions();hideAllBubbles();showCat(catBoard);
     setTimeout(()=>{bubble2.classList.add('show');continueBtn.classList.add('show');},350);
